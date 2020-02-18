@@ -32,6 +32,10 @@ def output(data, filepath):
     if filepath:
         with open(filepath, "w", encoding="utf8") as f:
             f.write(out)
+
+            for x in data:
+                if x['description'] is not null:
+                    print(x['description'])
     else:
         print(out)
 
