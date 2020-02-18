@@ -34,7 +34,7 @@ def output(data, filepath):
             f.write(out)
 
             for x in data:
-                if x['description'] is not null:
+                if 'description' in x and x['description']:
                     print(x['description'])
     else:
         print(out)
