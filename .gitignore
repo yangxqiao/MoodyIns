@@ -2,7 +2,7 @@
 Pipfile*
 .*
 instagram-crawler/inscrawler/bin/chromedriver_mac64.zip
-instagram-crawler/Pipfile
+instagram-crawler/Pipfile*
 instagram-crawler/inscrawler/__init__.pyc
 instagram-crawler/inscrawler/bin/chromedriver
 instagram-crawler/inscrawler/crawler.pyc
