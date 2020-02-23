@@ -9,6 +9,7 @@ from io import open
 from inscrawler import InsCrawler
 from inscrawler.settings import override_settings
 from inscrawler.settings import prepare_override_settings
+from ToneAnalyzer import toneAnalyzer
 
 
 def usage():
@@ -29,15 +30,19 @@ def arg_required(args, fields=[]):
 
 def output(data, filepath):
     out = json.dumps(data, ensure_ascii=False)
+    strings = ""
     if filepath:
         with open(filepath, "w", encoding="utf8") as f:
             f.write(out)
 
             for x in data:
                 if 'description' in x and x['description']:
-                    print(x['description'])
+                    # print(x['description'])
+                    strings += x['description']
     else:
         print(out)
+
+    toneAnalyzer(strings)
 
 
 if __name__ == "__main__":
