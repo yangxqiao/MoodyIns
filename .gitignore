@@ -1,1 +1,9 @@
 .DS_Store
+Pipfile*
+.*
+instagram-crawler/Pipfile
+instagram-crawler/inscrawler/__init__.pyc
+instagram-crawler/inscrawler/bin/chromedriver
+instagram-crawler/inscrawler/crawler.pyc
+instagram-crawler/inscrawler/secret.py
+
