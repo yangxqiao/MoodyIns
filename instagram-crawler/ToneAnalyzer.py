@@ -19,4 +19,7 @@ def toneAnalyzer(text):
         {'text': text},
         content_type='application/json'
     ).get_result()
-    print(json.dumps(tone_analysis, indent=2))
+    #dictTones = json.loads(json.dumps(tone_analysis, indent=2))
+    #dictTones = json.loads(tone_analysis)
+    print(tone_analysis['document_tone'])
+    return(tone_analysis['document_tone'])
