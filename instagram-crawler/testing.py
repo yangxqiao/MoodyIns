@@ -28,10 +28,10 @@ def some_func(urls):
             print("one")
             print(a)
             print(type(a))
-            theString = "\'{\"url\": \""+ a +"\"}\'"
+            theString = '{\"url\": \"'+ a +'\"}'
             print(theString)
             conn.request("POST", "/face/v1.0/detect?%s" % params,
-                     theString, headers)
+                    theString, headers)
             print("two")
             response = conn.getresponse()
             print("three")
