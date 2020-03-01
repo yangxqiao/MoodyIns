@@ -24,6 +24,7 @@ def some_func(urls):
     try:
         conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
         for a in urls:
+<<<<<<< HEAD
             # theString = "\'{\"url\": \""+ a +"\"}\'"
             # print(theString)
             theString = '{\"url\": \"'+ a +'\"}'
@@ -33,6 +34,16 @@ def some_func(urls):
             # conn.request("POST", "/face/v1.0/detect?%s" % params,
             #              '{"url": "https://i.insider.com/5dcc3df979d7570d633e10ea?width=1100&format=jpeg&auto=webp"}',
             #              headers)
+=======
+            print("one")
+            print(a)
+            print(type(a))
+            theString = '{\"url\": \"'+ a +'\"}'
+            print(theString)
+            conn.request("POST", "/face/v1.0/detect?%s" % params,
+                    theString, headers)
+            print("two")
+>>>>>>> refs/remotes/origin/master
             response = conn.getresponse()
             data = response.read()
             # print(data)

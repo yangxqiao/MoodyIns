@@ -1,41 +1,30 @@
 ########### Python 3.2 #############
 import http.client, urllib.request, urllib.parse, urllib.error, base64
-def some_func(urls):
-    headers = {
-        # Request headers
-        'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key': 'abf4a7db13074ff096c50d114d629cf2',
-    }
 
-    params = urllib.parse.urlencode({
-        # Request parameters
-        'returnFaceId': 'true',
-        'returnFaceLandmarks': 'false',
-        'returnFaceAttributes': 'emotion',
-        'recognitionModel': 'recognition_01',
-        'returnRecognitionModel': 'false',
-        'detectionModel': 'detection_01',
-    })
-    fool = {"faceAttributes": {"emotion":
-                                   {"anger": 0.0, "contempt": 0.0, "disgust": 0.0, "fear": 0.0, "happiness": 0.0,
-                                    "neutral": 0.0, "sadness": 0.0, "surprise": 0.0}}}
-    try:
-        conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
-        conn.request("POST", "/face/v1.0/detect?%s" % params,
-                     '{"url": "https://i.insider.com/5dcc3df979d7570d633e10ea?width=1100&format=jpeg&auto=webp"}', headers)
-        response = conn.getresponse()
-        data = response.read()
-        print(data)
-        # anger+=data['faceAttributes']['emotion']['anger']
-        # happiness += data['faceAttributes']['emotion']['happiness']
-        # print(happiness)
-        conn.close()
-    except Exception as e:
-        print("[Errno {0}] {1}".format(e.errno, e.strerror))
+headers = {
+    # Request headers
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': 'abf4a7db13074ff096c50d114d629cf2',
+}
 
+params = urllib.parse.urlencode({
+    # Request parameters
+    'returnFaceId': 'true',
+    'returnFaceLandmarks': 'false',
+    'returnFaceAttributes': 'emotion',
+    'recognitionModel': 'recognition_01',
+    'returnRecognitionModel': 'false',
+    'detectionModel': 'detection_01',
+})
 
-def main():
-    some_func(123)
-if __name__ == '__main__':
-    main()
+try:
+    conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
+    conn.request("POST", "/face/v1.0/detect?%s" % params, '{"url": "https://scontent-lax3-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.180.1440.1440a/s640x640/88183138_205697387301488_5907001222638953680_n.jpg?_nc_ht=scontent-lax3-1.cdninstagram.com&_nc_cat=1&_nc_ohc=8xgJ9zl2eR0AX9BuIVC&oh=cfdcdd69021381a5289f8a132ac8a410&oe=5E9746C7"}', headers)
+    response = conn.getresponse()
+    data = response.read()
+    print(data)
+    conn.close()
+except Exception as e:
+    print("[Errno {0}] {1}".format(e.errno, e.strerror))
+
 ####################################
