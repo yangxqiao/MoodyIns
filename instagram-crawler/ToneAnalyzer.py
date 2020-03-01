@@ -21,5 +21,6 @@ def toneAnalyzer(text):
     ).get_result()
     #dictTones = json.loads(json.dumps(tone_analysis, indent=2))
     #dictTones = json.loads(tone_analysis)
-    print(tone_analysis['document_tone'])
-    return(tone_analysis['document_tone'])
+
+    # print(tone_analysis['document_tone'])
+    return tone_analysis['document_tone']

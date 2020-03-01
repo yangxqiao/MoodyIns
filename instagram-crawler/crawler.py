@@ -44,12 +44,17 @@ def output(data, filepath):
                 urlList.append(x['img_url'])
     else:
         print(out)
+    print("printing strings")
     print(strings)
-    if strings:
-        toneAnalyzer(strings)
-    # print(data)
-    # print(urlList)
-    some_func(urlList)
+    textTone = ""
+    # if strings:
+    #     textTone = toneAnalyzer(strings)
+    imgTone = some_func(urlList) #a list of emotions: {happiness: 0.2 ....bluh}
+    print("printing imgtone")
+    print(imgTone)
+    print("printing textTone")
+    if textTone:
+        print(textTone)
 
 
 if __name__ == "__main__":

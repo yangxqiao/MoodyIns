@@ -8,3 +8,7 @@ instagram-crawler/inscrawler/bin/chromedriver
 instagram-crawler/inscrawler/crawler.pyc
 instagram-crawler/inscrawler/secret.py
 instagram-crawler/inscrawler/output
+
+instagram-crawler/inscrawler/__pycache__/*
+instagram-crawler/inscrawler/__pycache__/
+instagram-crawler/inscrawler/bin/chromedriver.exe
