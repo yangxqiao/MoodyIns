@@ -39,7 +39,6 @@
         line-height: 45px;
       }
 
-
       .content{
         padding-top: 20%;
         text-align: center;
@@ -77,8 +76,7 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
 
- 
-      #unified-origin-input{
+      #input-hashtag{
         background-color: #fff;
         font-family: Roboto;
         font-size: 15px;
@@ -87,17 +85,13 @@
         text-overflow: ellipsis;
         width: 620px;
         height: 45px;
+        border-radius: 10px;
       }
 
       #origin-btn{
         width: 620px;
         margin: 25px auto;
         height: 45px;
-      }
-
-      .btn a{
-        text-decoration: none;
-        color: #696969;
       }
 
       #footer
@@ -114,8 +108,18 @@
         margin: 0px;
       }
 
-      .search{
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      .button {
+        transition-duration: 0.4s;
+        margin-top: 20px;
+        height: 35px;
+        width: 150px;
+        border-radius: 12px;
+      }
+
+      .button:hover {
+        background-color: #383F51;
+        color: white;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
       }
 
     </style>
@@ -135,10 +139,13 @@
               <div id="origin-btn">
                 <div class="row">
                   <div class="col-lg-12">
-                      <div class="ui icon input">
-                        <input id="unified-origin-input" class="controls" type="text"
+                      <div class="ui input">
+                        <form class="pure-form">
+                          <input id="input-hashtag" class="controls" type="text"
                             placeholder="Enter a hashtag">
-                        <i class="search icon"></i>
+
+                          <button type="submit" onclick="callBackend()" class="button">Search!</button>
+                        </form>
                       </div>
                   </div>
                 </div>
@@ -153,6 +160,26 @@
     <div id="footer"> 
       <p> Enji Li | Julie Shi | Sophia Song | Yang Qiao &copy; 2020 </p> 
     </div>
+
+    <script type='text/javascript'>
+      function callBackend()
+      {
+        var nameInput = document.getElementById('input-hashtag');
+
+        document.querySelector('form.pure-form').addEventListener('submit', function (e) {
+
+        //prevent the normal submission of the form
+        e.preventDefault();
+        if(nameInput.value)
+        {
+          console.log(nameInput.value);    
+        }
+        else{
+          alert('Please enter a valid hashtag.')
+        }
+        });
+      }
+    </script>
 
     <script>
       // List of sentences
