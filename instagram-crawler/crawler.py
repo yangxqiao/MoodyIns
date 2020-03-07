@@ -37,17 +37,17 @@ def output(data, filepath):
 
             for x in data:
                 if 'description' in x and x['description']:
-                    print(x['description'])
+                    # print(x['description'])
                     strings += x['description']
                     strings += " "
                 urlList.append(x['img_url'])
     else:
         print(out)
-    print("printing strings")
-    print(strings)
+    # print("printing strings")
+    # print(strings)
     textTone = ""
-    # if strings:
-    #     textTone = toneAnalyzer(strings)
+    if strings:
+        textTone = toneAnalyzer(strings)
     imgTone = some_func(urlList) #a list of emotions: {happiness: 0.2 ....bluh}
     print("printing imgtone")
     print(imgTone)
