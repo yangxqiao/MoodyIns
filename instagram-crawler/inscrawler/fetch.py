@@ -3,6 +3,7 @@ from time import sleep
 
 from .settings import settings
 
+
 def fetch_initial_comment(browser, dict_post):
     comments_elem = browser.find_one("ul.XQXOT")
     first_post_elem = browser.find_one(".ZyFrc", comments_elem)

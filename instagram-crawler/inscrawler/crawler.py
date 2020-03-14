@@ -81,16 +81,32 @@ class InsCrawler(Logging):
 
         pbar = tqdm(total=num)
 
+        '''Update 03/13/2020'''
         def start_fetching(pre_post_num, wait_time):
             ele_posts = browser.find(".v1Nh3 a")
             for ele in ele_posts:
                 key = ele.get_attribute("href")
+                print(key)
                 if key not in key_set:
-                    dict_post = { "key": key }
+                    dict_post = {"key": key}
                     ele_img = browser.find_one(".KL4Bh img", ele)
-                    dict_post["caption"] = ele_img.get_attribute("alt")
                     dict_post["img_url"] = ele_img.get_attribute("src")
 
+                    # Update 03/13/2020: make another browser and crawl
+                    caption = ""
+                    try:
+                        second_browser = Browser(has_screen=False)
+                        second_browser.get(key)
+                        caption = second_browser.find_one(".C4VMK").find_element_by_tag_name("span").text
+                        print("caption: ", caption)
+                    except Exception:
+                        try:
+                            caption = second_browser.find_one(".C4VMK").find_element_by_tag_name("h1").text
+                            print("caption: ", caption)
+                        except Exception:
+                            caption = ele_img.get_attribute("alt")
+                    dict_post["caption"] = caption
+                    # Update 03/13/2020: Update finish
                     fetch_details(browser, dict_post)
 
                     key_set.add(key)
@@ -113,7 +129,6 @@ class InsCrawler(Logging):
             browser.scroll_down()
 
             return pre_post_num, wait_time
-
         pbar.set_description("fetching")
         while len(posts) < num and wait_time < TIMEOUT:
             post_num, wait_time = start_fetching(pre_post_num, wait_time)
