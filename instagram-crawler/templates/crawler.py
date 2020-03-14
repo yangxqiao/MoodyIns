@@ -9,13 +9,8 @@ from io import open
 from inscrawler import InsCrawler
 from inscrawler.settings import override_settings
 from inscrawler.settings import prepare_override_settings
-<<<<<<< HEAD
 from FaceAnalyzer import faceAnalyzer
 from ToneAnalyzer import toneAnalyzer
-=======
-from ToneAnalyzer import toneAnalyzer
-from testing import some_func
->>>>>>> 205b071c9bd63dc838bb751b55e69f7b405b338e
 
 def usage():
     return '''python crawler.py hashtag -t taiwan -o ./output'''
