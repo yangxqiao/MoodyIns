@@ -3,11 +3,7 @@ from inscrawler import InsCrawler
 from inscrawler.settings import override_settings
 from inscrawler.settings import prepare_override_settings
 from ToneAnalyzer import toneAnalyzer
-<<<<<<< HEAD
-from FaceAnalyzer import some_func
-=======
-from testing import some_func
->>>>>>> 205b071c9bd63dc838bb751b55e69f7b405b338e
+from FaceAnalyzer import faceAnalyzer
 from templates.crawler import get_posts_by_hashtag, output
 
 app = Flask(__name__)
@@ -16,7 +12,6 @@ def index():
     return render_template('homepage_test.html')
 
 @app.route('/',methods=['POST'])
-
 def getVal():
     hashtag = request.form['hashtag']
     tone = output(get_posts_by_hashtag(hashtag, 5, debug=True))

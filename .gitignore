@@ -12,3 +12,5 @@ instagram-crawler/inscrawler/output
 instagram-crawler/inscrawler/__pycache__/*
 instagram-crawler/inscrawler/__pycache__/
 instagram-crawler/inscrawler/bin/chromedriver.exe
+instagram-crawler/templates/__pycache__/crawler.cpython-37.pyc
+
