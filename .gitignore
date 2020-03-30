@@ -14,3 +14,8 @@ instagram-crawler/inscrawler/__pycache__/
 instagram-crawler/inscrawler/bin/chromedriver.exe
 instagram-crawler/templates/__pycache__/crawler.cpython-37.pyc
 
+instagram-crawler/__pycache__/FaceAnalyzer.cpython-37.pyc
+instagram-crawler/__pycache__/ToneAnalyzer.cpython-37.pyc
+instagram-crawler/inscrawler/bin/chromedriver_mac64 (1).zip
+instagram-crawler/templates/__pycache__/crawler.cpython-37.pyc
+instagram-crawler/templates/testCharts.html

@@ -15,7 +15,11 @@ def index():
 def getVal():
     hashtag = request.form['hashtag']
     tone = output(get_posts_by_hashtag(hashtag, 5, debug=True))
-    return render_template('pass.html',tone = tone, anger = tone[0]['anger'], disgust = tone[0]['disgust'], fear = tone[0]['fear'], happiness = tone[0]['happiness'], neutral = tone[0]['neutral'], sadness = tone[0]['sadness'], surprise = 'surprise')
+    print("tone below")
+    print(tone)
+    # would fall into error when imgtone or txttone is none after executing analyzers
+    # and it's very likely to happen
+    return render_template('pass.html',tone = tone, anger = tone[0]['anger'], disgust = tone[0]['disgust'], fear = tone[0]['fear'], happiness = tone[0]['happiness'], neutral = tone[0]['neutral'], sadness = tone[0]['sadness'], surprise = tone[0]['surprise'], txtToneId = tone[1]['tones'][0]['tone_id'], txtToneScore = tone[1]['tones'][0]['score'])
 
 if __name__ == '__main__':
     app.run(debug=True)
