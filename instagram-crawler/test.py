@@ -22,25 +22,27 @@ def getVal():
     # and it's very likely to happen
 
 
-    txtanger, txtfear, txtjoy, txtsadness, txtanalytical, txtconfident, txttentative = 0,0,0,0,0,0,0
+    txtanger, txtfear, txtjoy, txtsadness, txtanalytical, txtconfident, txttentative, txtnotAvailable = 0,0,0,0,0,0,0,0
+    if tone[1]:
+        for i in tone[1]['tones']:
+            if i['tone_id'] == 'anger':
+                txtanger = i['score']
+            if i['tone_id'] == 'fear':
+                txtfear = i['score']
+            if i['tone_id'] == 'joy':
+                txtjoy = i['score']
+            if i['tone_id'] == 'sadness':
+                txtsadness = i['score']
+            if i['tone_id'] == 'analytical':
+                txtanalytical = i['score']
+            if i['tone_id'] == 'confident':
+                txtconfident = i['score']
+            if i['tone_id'] == 'tentative':
+                txttentative = i['score']
+    else:
+        txtnotAvailable = 1
 
-    for i in tone[1]['tones']:
-        if i['tone_id'] == 'anger':
-            txtanger = i['score']
-        if i['tone_id'] == 'fear':
-            txtfear = i['score']
-        if i['tone_id'] == 'joy':
-            txtjoy = i['score']
-        if i['tone_id'] == 'sadness':
-            txtsadness = i['score']
-        if i['tone_id'] == 'analytical':
-            txtanalytical = i['score']
-        if i['tone_id'] == 'confident':
-            txtconfident = i['score']
-        if i['tone_id'] == 'tentative':
-            txttentative = i['score']
-
-    imganger, imgdisgust, imgfear, imghappiness, imgneutral, imgsadness, imgsurprise = 0,0,0,0,0,0,0
+    imganger, imgdisgust, imgfear, imghappiness, imgneutral, imgsadness, imgsurprise, imgnotAvailable = 0,0,0,0,0,0,0,0
 
     if tone[0]:
         imganger = tone[0]['anger']
@@ -50,13 +52,16 @@ def getVal():
         imgneutral = tone[0]['neutral']
         imgsadness = tone[0]['sadness']
         imgsurprise = tone[0]['surprise']
+    else:
+        imgnotAvailable = 1
+
 
     return render_template('pass.html',tone = tone, anger = imganger, disgust = imgdisgust, fear = imgfear,
                            happiness = imghappiness,neutral = imgneutral, sadness = imgsadness, surprise = imgsurprise,
-
+                            imgnotAvailable = imgnotAvailable,
                            txtanger = txtanger, txtfear = txtfear, txtjoy = txtjoy, txtsadness = txtsadness,
                            txtanalytical = txtanalytical,
-                           txtconfident = txtconfident, txttentative = txttentative
+                           txtconfident = txtconfident, txttentative = txttentative, txtnotAvailable = txtnotAvailable
                            )
 
 if __name__ == '__main__':
