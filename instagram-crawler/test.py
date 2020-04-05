@@ -17,9 +17,32 @@ def getVal():
     tone = output(get_posts_by_hashtag(hashtag, 5, debug=True))
     print("tone below")
     print(tone)
+
     # would fall into error when imgtone or txttone is none after executing analyzers
     # and it's very likely to happen
-    return render_template('pass.html',tone = tone, anger = tone[0]['anger'], disgust = tone[0]['disgust'], fear = tone[0]['fear'], happiness = tone[0]['happiness'], neutral = tone[0]['neutral'], sadness = tone[0]['sadness'], surprise = tone[0]['surprise'], txtToneId = tone[1]['tones'][0]['tone_id'], txtToneScore = tone[1]['tones'][0]['score'])
+    anger, fear, joy, sadness, analytical, confident, tentative = 0,0,0,0,0,0,0
+
+    for i in tone[1]['tones']:
+        if i['tone_id'] == 'anger':
+            anger = i['score']
+        if i['tone_id'] == 'fear':
+            fear = i['score']
+        if i['tone_id'] == 'joy':
+            joy = i['score']
+        if i['tone_id'] == 'sadness':
+            sadness = i['score']
+        if i['tone_id'] == 'analytical':
+            analytical = i['score']
+        if i['tone_id'] == 'confident':
+            confident = i['score']
+        if i['tone_id'] == 'tentative':
+            tentative = i['score']
+
+    return render_template('pass.html',tone = tone, anger = tone[0]['anger'], disgust = tone[0]['disgust'], fear = tone[0]['fear'], happiness = tone[0]['happiness'],
+                           neutral = tone[0]['neutral'], sadness = tone[0]['sadness'], surprise = tone[0]['surprise'],
+                           txtanger = anger, txtfear = fear, txtjoy = joy, txtsadness = sadness, txtanalytical = analytical,
+                           txtconfident = confident, txttentative = tentative
+                           )
 
 if __name__ == '__main__':
     app.run(debug=True)
