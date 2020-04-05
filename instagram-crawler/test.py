@@ -20,28 +20,43 @@ def getVal():
 
     # would fall into error when imgtone or txttone is none after executing analyzers
     # and it's very likely to happen
-    anger, fear, joy, sadness, analytical, confident, tentative = 0,0,0,0,0,0,0
+
+
+    txtanger, txtfear, txtjoy, txtsadness, txtanalytical, txtconfident, txttentative = 0,0,0,0,0,0,0
 
     for i in tone[1]['tones']:
         if i['tone_id'] == 'anger':
-            anger = i['score']
+            txtanger = i['score']
         if i['tone_id'] == 'fear':
-            fear = i['score']
+            txtfear = i['score']
         if i['tone_id'] == 'joy':
-            joy = i['score']
+            txtjoy = i['score']
         if i['tone_id'] == 'sadness':
-            sadness = i['score']
+            txtsadness = i['score']
         if i['tone_id'] == 'analytical':
-            analytical = i['score']
+            txtanalytical = i['score']
         if i['tone_id'] == 'confident':
-            confident = i['score']
+            txtconfident = i['score']
         if i['tone_id'] == 'tentative':
-            tentative = i['score']
+            txttentative = i['score']
 
-    return render_template('pass.html',tone = tone, anger = tone[0]['anger'], disgust = tone[0]['disgust'], fear = tone[0]['fear'], happiness = tone[0]['happiness'],
-                           neutral = tone[0]['neutral'], sadness = tone[0]['sadness'], surprise = tone[0]['surprise'],
-                           txtanger = anger, txtfear = fear, txtjoy = joy, txtsadness = sadness, txtanalytical = analytical,
-                           txtconfident = confident, txttentative = tentative
+    imganger, imgdisgust, imgfear, imghappiness, imgneutral, imgsadness, imgsurprise = 0,0,0,0,0,0,0
+
+    if tone[0]:
+        imganger = tone[0]['anger']
+        imgdisgust = tone[0]['disgust']
+        imgfear = tone[0]['fear']
+        imghappiness = tone[0]['happiness']
+        imgneutral = tone[0]['neutral']
+        imgsadness = tone[0]['sadness']
+        imgsurprise = tone[0]['surprise']
+
+    return render_template('pass.html',tone = tone, anger = imganger, disgust = imgdisgust, fear = imgfear,
+                           happiness = imghappiness,neutral = imgneutral, sadness = imgsadness, surprise = imgsurprise,
+
+                           txtanger = txtanger, txtfear = txtfear, txtjoy = txtjoy, txtsadness = txtsadness,
+                           txtanalytical = txtanalytical,
+                           txtconfident = txtconfident, txttentative = txttentative
                            )
 
 if __name__ == '__main__':
