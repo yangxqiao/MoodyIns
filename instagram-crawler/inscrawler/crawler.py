@@ -75,6 +75,7 @@ class InsCrawler(Logging):
         TIMEOUT = 600
         browser = self.browser
         key_set = set()
+        post_url = []
         posts = []
         pre_post_num = 0
         wait_time = 1
@@ -84,29 +85,31 @@ class InsCrawler(Logging):
         '''Update 03/13/2020'''
         def start_fetching(pre_post_num, wait_time):
             ele_posts = browser.find(".v1Nh3 a")
+
             for ele in ele_posts:
                 key = ele.get_attribute("href")
+                post_url.append(key)
                 print(key)
                 if key not in key_set:
                     dict_post = {"key": key}
                     ele_img = browser.find_one(".KL4Bh img", ele)
                     dict_post["img_url"] = ele_img.get_attribute("src")
 
-                    # Update 03/13/2020: make another browser and crawl
-                    caption = ""
-                    try:
-                        second_browser = Browser(has_screen=False)
-                        second_browser.get(key)
-                        caption = second_browser.find_one(".C4VMK").find_element_by_tag_name("span").text
-                        print("caption: ", caption)
-                    except Exception:
-                        try:
-                            caption = second_browser.find_one(".C4VMK").find_element_by_tag_name("h1").text
-                            print("caption: ", caption)
-                        except Exception:
-                            caption = ele_img.get_attribute("alt")
-                    dict_post["caption"] = caption
-                    # Update 03/13/2020: Update finish
+                    # # Update 03/13/2020: make another browser and crawl
+                    # caption = ""
+                    # try:
+                    #     second_browser = Browser(has_screen=False)
+                    #     second_browser.get(key)
+                    #     caption = second_browser.find_one(".C4VMK").find_element_by_tag_name("span").text
+                    #     print("caption: ", caption)
+                    # except Exception:
+                    #     try:
+                    #         caption = second_browser.find_one(".C4VMK").find_element_by_tag_name("h1").text
+                    #         print("caption: ", caption)
+                    #     except Exception:
+                    #         caption = ele_img.get_attribute("alt")
+                    # dict_post["caption"] = caption
+                    # # Update 03/13/2020: Update finish
                     fetch_details(browser, dict_post)
 
                     key_set.add(key)
@@ -128,10 +131,10 @@ class InsCrawler(Logging):
             pre_post_num = len(posts)
             browser.scroll_down()
 
-            return pre_post_num, wait_time
+            return pre_post_num, wait_time, post_url
         pbar.set_description("fetching")
         while len(posts) < num and wait_time < TIMEOUT:
-            post_num, wait_time = start_fetching(pre_post_num, wait_time)
+            post_num, wait_time, post_url = start_fetching(pre_post_num, wait_time)
             pbar.update(post_num - pre_post_num)
             pre_post_num = post_num
 
@@ -141,4 +144,5 @@ class InsCrawler(Logging):
 
         pbar.close()
         print("Done. Fetched %s posts." % (min(len(posts), num)))
-        return posts[:num]
+        return [posts[:num], post_url]
+
