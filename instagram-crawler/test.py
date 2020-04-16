@@ -55,15 +55,17 @@ def getVal():
     else:
         imgnotAvailable = 1
 
-
+    url = {'url1': tone[2][0], 'url2': tone[2][1], 'url3': tone[2][2], 'url4': tone[2][3], 'url5': tone[2][4]}
+    post = {'post1': tone[3][0], 'post2': tone[3][1], 'post3': tone[3][2], 'post4': tone[3][3], 'post5': tone[3][4]}
     return render_template('final-homepage.html',tone = tone, anger = imganger, disgust = imgdisgust, fear = imgfear,
                            happiness = imghappiness,neutral = imgneutral, sadness = imgsadness, surprise = imgsurprise,
                             imgnotAvailable = imgnotAvailable,
                            txtanger = txtanger, txtfear = txtfear, txtjoy = txtjoy, txtsadness = txtsadness,
                            txtanalytical = txtanalytical,
                            txtconfident = txtconfident, txttentative = txttentative, txtnotAvailable = txtnotAvailable,
-                            url1 = tone[2][0], url2 = tone[2][1], url3 = tone[2][2], url4 = tone[2][3], url5 = tone[2][4],
-                           post1=tone[3][0], post2=tone[3][1], post3=tone[3][2], post4=tone[3][3], post5=tone[3][4]
+                           #  url1 = tone[2][0], url2 = tone[2][1], url3 = tone[2][2], url4 = tone[2][3], url5 = tone[2][4],
+                           # post1=tone[3][0], post2=tone[3][1], post3=tone[3][2], post4=tone[3][3], post5=tone[3][4]
+                           url = url, post = post
                            )
 
 if __name__ == '__main__':

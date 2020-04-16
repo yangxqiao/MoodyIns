@@ -16,7 +16,7 @@
             margin-left: auto;
             display: block;
         }
-        .image-post-container {
+        #image-post-container {
             margin-left: 50px;
             margin-right: 50px;
             display: flex;
@@ -142,9 +142,9 @@
             };
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-            var chart2 = new google.visualization.PieChart(document.getElementById('chart_hist'));
+            // var chart2 = new google.visualization.PieChart(document.getElementById('chart_hist'));
             chart.draw(data, options);
-            chart2.draw(data2, options2);
+            // chart2.draw(data2, options2);
         }
 
     </script>
@@ -179,92 +179,60 @@
 <section id="tabs">
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#img" role="tab">img</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#text" role="tab">text</a>
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#posts" role="tab">Posts</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#charts" role="tab">Analysis</a>
         </div>
     </nav>
 
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="img" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="image-post-container">
-                <div class="image-post">
-                    <div class="image">
-                        <a href="{{ post1 }}" target="_blank">
-                            <img src="{{ url1 }}">
-                        </a>
-                    </div>
-                    <div class="score-bar">
-                        <div class="score-section" id="anger"></div>
-                        <div class="score-section" id="happiness"></div>
-                        <div class="score-section" id="neutral"></div>
-                        <div class="score-section" id="sadness"></div>
-                    </div>
-                </div>
-                <div class="image-post">
-                    <div class="image">
-                        <a href="{{ post2 }}" target="_blank">
-                            <img src="{{ url2 }}">
-                        </a>
-                    </div>
-                    <div class="score-bar">
-                        <div class="score-section" id="anger"></div>
-                        <div class="score-section" id="happiness"></div>
-                        <div class="score-section" id="neutral"></div>
-                        <div class="score-section" id="sadness"></div>
-                    </div>
-                </div>
-                <div class="image-post">
-                    <div class="image">
-                        <a href="{{ post3 }}" target="_blank">
-                            <img src="{{ url3 }}">
-                        </a>
-                    </div>
-                    <div class="score-bar">
-                        <div class="score-section" id="anger"></div>
-                        <div class="score-section" id="happiness"></div>
-                        <div class="score-section" id="neutral"></div>
-                        <div class="score-section" id="sadness"></div>
-                    </div>
-                </div>
-                <div class="image-post">
-                    <div class="image">
-                        <a href="{{ post4 }}" target="_blank">
-                            <img src="{{ url4 }}">
-                        </a>
-                    </div>
-                    <div class="score-bar">
-                        <div class="score-section" id="anger"></div>
-                        <div class="score-section" id="happiness"></div>
-                        <div class="score-section" id="neutral"></div>
-                        <div class="score-section" id="sadness"></div>
-                    </div>
-                </div>
-                <div class="image-post">
-                <div class="image">
-                    <a href="{{ post5 }}" target="_blank">
-                        <img src="{{ url5 }}">
-                    </a>
-                </div>
-                <div class="score-bar">
-                    <div class="score-section" id="anger"></div>
-                    <div class="score-section" id="happiness"></div>
-                    <div class="score-section" id="neutral"></div>
-                    <div class="score-section" id="sadness"></div>
-                </div>
-            </div>
+        <div class="tab-pane fade show active" id="posts" role="tabpanel">
+            <div id="image-post-container">
+                <!--<div class="image-post" >-->
+                    <!--<div class="image">-->
+                        <!--<a href="{{ post1 }}" target="_blank">-->
+                            <!--<img src="{{ url1 }}">-->
+                        <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="score-bar">-->
+                        <!--<div class="score-section" id="anger"></div>-->
+                        <!--<div class="score-section" id="happiness"></div>-->
+                        <!--<div class="score-section" id="neutral"></div>-->
+                        <!--<div class="score-section" id="sadness"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
 
-        <div class="tab-pane fade" id="text" role="tabpanel">
+        <div class="tab-pane fade" id="charts" role="tabpanel">
             <h4 class="mt-2">Messages tab content</h4>
             <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
             <div id="chart_div" class="chart"></div>
-            <div id="chart_hist" class="chart"></div>
+            <!-- <div id="chart_hist" class="chart"></div> -->
         </div>
     </div>
 </section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dataURL = JSON.parse(JSON.stringify({{ url|safe }}));
+        var dataPost = JSON.parse(JSON.stringify({{ post|safe }}));
+        var key, count = 0;
+        for(key in dataURL) {
+            count++;
+        }
 
+
+       var urlKey = ['url1', 'url2', 'url3', 'url4', 'url5'];
+       var postKey = ['post1', 'post2', 'post3', 'post4', 'post5'];
+       for(var i = 0; i < count; i++){
+             var my_html = "<div class=\"image-post\" > <div class=\"image\"> <a href=\" " + dataPost[postKey[i]] + " \" target=\"_blank\"> <img src=\" " + dataURL[urlKey[i]] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\"></div> <div class=\"score-section\" id=\"happiness\"></div> <div class=\"score-section\" id=\"neutral\"></div> <div class=\"score-section\" id=\"sadness\"></div></div> </div>"
+             document.getElementById('image-post-container').innerHTML += my_html
+        }
+
+    }, false);
+
+
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
