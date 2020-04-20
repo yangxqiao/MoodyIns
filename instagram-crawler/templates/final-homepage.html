@@ -146,9 +146,9 @@
             };
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-            // var chart2 = new google.visualization.PieChart(document.getElementById('chart_hist'));
+            var chart2 = new google.visualization.PieChart(document.getElementById('chart_hist'));
             chart.draw(data, options);
-            // chart2.draw(data2, options2);
+            chart2.draw(data2, options2);
         }
 
     </script>
@@ -222,7 +222,7 @@
             <h4 class="mt-2">Messages tab content</h4>
             <p>This page uses Google chart to represent people's emotion combination. Possible components are Anger, Happniess, Neutral, Contempt, Surprise, Disgust, Fear, and Sadness. We collect images from Instagram with python webdriver crawler. Then we adapted Azure Analyzer API from Microsoft to analyze their emotions.</p>
             <div id="chart_div" class="chart"></div>
-            <!-- <div id="chart_hist" class="chart"></div> -->
+            <div id="chart_hist" class="chart"></div>
         </div>
     </div>
 </section>
