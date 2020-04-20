@@ -145,4 +145,3 @@ class InsCrawler(Logging):
         pbar.close()
         print("Done. Fetched %s posts." % (min(len(posts), num)))
         return [posts[:num], post_url]
-
