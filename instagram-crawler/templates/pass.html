@@ -16,6 +16,8 @@
         // draws it.
         function drawChart() {
             // Create the data table.
+
+
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
@@ -24,36 +26,40 @@
         ['Happiness', {{happiness}}],
         ['Neutral', {{neutral}}],
         ['Sadness', {{sadness}}],
+        ['Not Available', {{ imgnotAvailable }}]
         ]);
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
+        var options = {'title':'People\'s expression through image',
                    'width':400,
                    'height':300};
             // Set chart options
-        var data2 = google.visualization.arrayToDataTable([
-            ['Dinosaur', 'Length'],
-            // not working with below and I don't know why
-            {#['joy', {{ txtToneScore }}]#}
-            {#['joy', 3],#}
 
-            ['Acrocanthosaurus (top-spined lizard)', 12.2],
-            ['Albertosaurus (Alberta lizard)', 9.1],
-            ['Allosaurus (other lizard)', 12.2],
-            ['Apatosaurus (deceptive lizard)', 22.9],
-            ['Archaeopteryx (ancient wing)', 0.9],
-            ['Argentinosaurus (Argentina lizard)', 36.6],
-            ['Baryonyx (heavy claws)', 9.1],
-            ['Brachiosaurus (arm lizard)', 30.5],
-            ['Ceratosaurus (horned lizard)', 6.1],
-            ['Velociraptor (swift robber)', 1.8]]);
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Topping2');
+        data2.addColumn('number', 'Slices2');
+        data2.addRows([
+
+            // not working with below and I don't know why
+            ['sadness', {{txtsadness}}],
+            ['fear', {{ txtfear }}],
+            ['joy', {{ txtjoy }}],
+            ['confident', {{ txtconfident }}],
+            ['anger', {{ txtanger }}],
+            ['analytical', {{ txtanalytical }}],
+            ['tentative', {{ txttentative }}],
+            ['Not Available', {{ txtnotAvailable }}]
+        ]);
+
+
 
         var options2 = {
-            title: 'Lengths of dinosaurs, in meters',
-            legend: { position: 'none' },
+            'title': 'People\'s expression through text',
+            'width':400,
+            'height':300
         };
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        var chart2 = new google.visualization.Histogram(document.getElementById('chart_hist'));
+        var chart2 = new google.visualization.PieChart(document.getElementById('chart_hist'));
         chart.draw(data, options);
         chart2.draw(data2, options2);
         }
@@ -133,6 +139,8 @@
 <!--Div that will hold the pie chart-->
 <div id="chart_div" class="chart"></div>
 <div id="chart_hist" class="chart"></div>
+<h3>joy {{ txtjoy }}</h3>
+<h3>anger {{ txtanger }}</h3>
 
 <div class="image-post-container">
     <div class="image-post">
