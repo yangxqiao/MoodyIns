@@ -109,6 +109,10 @@
                 ['Happiness', {{happiness}}],
                 ['Neutral', {{neutral}}],
                 ['Sadness', {{sadness}}],
+                ['Contempt', {{contempt}}],
+                ['Surprise', {{surprise}}],
+                ['Fear', {{fear}}],
+                ['Disgust', {{disgust}}],
                 ['Not Available', {{ imgnotAvailable }}]
             ]);
             // Set chart options
@@ -170,6 +174,17 @@
         <!--          <input type="button" onclick="unhide(this, 'tabs') " value="Search" name="hashtag"> -->
         <form class="pure-form" action="." method="post">
             <input id="input-hashtag" class="controls" type="text" name="hashtag" placeholder="Enter a hashtag">
+
+            <label for="input-num">Choose number of posts you want to check: </label>
+            <select id="input-num" name="numLabel">
+                <option value="3">3</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                <option value="12">12</option>
+                <option value="15">15</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+            </select>
             <input type="submit" value="submit"/>
         </form>
     </nav>
@@ -186,7 +201,7 @@
 
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="posts" role="tabpanel">
-            <div id="image-post-container">
+            <div id="image-post-container" class="row">
                 <!--<div class="image-post" >-->
                     <!--<div class="image">-->
                         <!--<a href="{{ post1 }}" target="_blank">-->
@@ -205,7 +220,7 @@
 
         <div class="tab-pane fade" id="charts" role="tabpanel">
             <h4 class="mt-2">Messages tab content</h4>
-            <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+            <p>This page uses Google chart to represent people's emotion combination. Possible components are Anger, Happniess, Neutral, Contempt, Surprise, Disgust, Fear, and Sadness. We collect images from Instagram with python webdriver crawler. Then we adapted Azure Analyzer API from Microsoft to analyze their emotions.</p>
             <div id="chart_div" class="chart"></div>
             <!-- <div id="chart_hist" class="chart"></div> -->
         </div>
@@ -221,11 +236,13 @@
             count++;
         }
 
+        {#url = tone[2]   #}
+        {#post = tone[3]#}
 
-       var urlKey = ['url1', 'url2', 'url3', 'url4', 'url5'];
-       var postKey = ['post1', 'post2', 'post3', 'post4', 'post5'];
+       {#var urlKey = ['url1', 'url2', 'url3', 'url4', 'url5', 'url6', 'url7','url8','url9'];#}
+       {#var postKey = ['post1', 'post2', 'post3', 'post4', 'post5','post6','post7','post8','post9'];#}
        for(var i = 0; i < count; i++){
-             var my_html = "<div class=\"image-post\" > <div class=\"image\"> <a href=\" " + dataPost[postKey[i]] + " \" target=\"_blank\"> <img src=\" " + dataURL[urlKey[i]] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\"></div> <div class=\"score-section\" id=\"happiness\"></div> <div class=\"score-section\" id=\"neutral\"></div> <div class=\"score-section\" id=\"sadness\"></div></div> </div>"
+             var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\"></div> <div class=\"score-section\" id=\"happiness\"></div> <div class=\"score-section\" id=\"neutral\"></div> <div class=\"score-section\" id=\"sadness\"></div></div> </div>"
              document.getElementById('image-post-container').innerHTML += my_html
         }
 
