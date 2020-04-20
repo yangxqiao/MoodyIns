@@ -20,6 +20,8 @@ from .utils import instagram_int
 from .utils import randmized_sleep
 from .utils import retry
 
+import urllib.request, json 
+
 
 class Logging(object):
     PREFIX = "instagram-crawler"
@@ -51,7 +53,6 @@ class Logging(object):
         if self.log_disable:
             return
         self.logger.close()
-
 
 class InsCrawler(Logging):
     URL = "https://www.instagram.com"
@@ -89,12 +90,16 @@ class InsCrawler(Logging):
             for ele in ele_posts:
                 key = ele.get_attribute("href")
                 post_url.append(key)
+                
                 print(key)
                 if key not in key_set:
                     dict_post = {"key": key}
                     ele_img = browser.find_one(".KL4Bh img", ele)
                     dict_post["img_url"] = ele_img.get_attribute("src")
-
+                    
+                    url = urllib.request.urlopen(key + "?__a=1")
+                    data = json.loads(url.read().decode())
+                    print(data["graphql"]["shortcode_media"]["edge_media_to_caption"]["edges"][0]["node"]["text"])
                     # # Update 03/13/2020: make another browser and crawl
                     # caption = ""
                     # try:
@@ -108,7 +113,7 @@ class InsCrawler(Logging):
                     #         print("caption: ", caption)
                     #     except Exception:
                     #         caption = ele_img.get_attribute("alt")
-                    # dict_post["caption"] = caption
+                    dict_post["caption"] = data["graphql"]["shortcode_media"]["edge_media_to_caption"]["edges"][0]["node"]["text"]
                     # # Update 03/13/2020: Update finish
                     fetch_details(browser, dict_post)
 
@@ -145,3 +150,5 @@ class InsCrawler(Logging):
         pbar.close()
         print("Done. Fetched %s posts." % (min(len(posts), num)))
         return [posts[:num], post_url]
+
+#get_latest_posts_by_tag("beauty", 5)

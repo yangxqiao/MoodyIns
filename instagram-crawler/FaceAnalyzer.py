@@ -64,7 +64,7 @@ def faceAnalyzer(urls):
                 # print(fool)
                 faces += 1
             conn.close()
-
+            
         for key in fool:
             fool[key]/=faces
         # print(fool)
