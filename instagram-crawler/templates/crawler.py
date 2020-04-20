@@ -47,13 +47,15 @@ def output(data):
         print(strings)
         textTone = toneAnalyzer(strings)
     print(urlList)
-    imgTone = faceAnalyzer(urlList) #a list of emotions: {happiness: 0.2 ....bluh}
+    imgTone, imgIndividualTone = faceAnalyzer(urlList) #a list of emotions: {happiness: 0.2 ....bluh}
     print("printing imgtone")
     print(imgTone)
     print("printing textTone")
     if textTone:
         print(textTone)
-    return [imgTone, textTone, urlList, data[1]]
+    # print("IMG individual tones")
+    # print(imgIndividualTone)
+    return [imgTone, textTone, urlList, data[1], imgIndividualTone]
 
 
 if __name__ == "__main__":

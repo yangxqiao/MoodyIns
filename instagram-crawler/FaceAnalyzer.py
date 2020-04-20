@@ -22,6 +22,7 @@ def faceAnalyzer(urls):
     happiness = 0
     faces = 0
     try:
+        individualTones = []
         conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
         for a in urls:
 
@@ -55,7 +56,8 @@ def faceAnalyzer(urls):
             # print(type(new_data))
             # print(new_data)
             # edge cases when images have no faces
-            # print(new_data)
+            print("printing new_data")
+            print(new_data)
             if new_data:
                 # print(new_data[0]['faceAttributes']['emotion'])
                 # print("dididi")
@@ -63,12 +65,13 @@ def faceAnalyzer(urls):
                     fool[key] += new_data[0]['faceAttributes']['emotion'][key]
                 # print(fool)
                 faces += 1
+                individualTones.append(new_data[0]['faceAttributes']['emotion'])
             conn.close()
             
         for key in fool:
             fool[key]/=faces
         # print(fool)
-        return fool
+        return fool, individualTones
 
     except Exception as e:
         print(e)
