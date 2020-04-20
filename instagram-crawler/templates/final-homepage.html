@@ -231,6 +231,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         var dataURL = JSON.parse(JSON.stringify({{ url|safe }}));
         var dataPost = JSON.parse(JSON.stringify({{ post|safe }}));
+        var dataImgScores = JSON.parse(JSON.stringify({{ imgscores|safe }}));
         var key, count = 0;
         for(key in dataURL) {
             count++;

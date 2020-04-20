@@ -99,7 +99,6 @@ class InsCrawler(Logging):
                     
                     url = urllib.request.urlopen(key + "?__a=1")
                     data = json.loads(url.read().decode())
-                    print(data["graphql"]["shortcode_media"]["edge_media_to_caption"]["edges"][0]["node"]["text"])
                     # # Update 03/13/2020: make another browser and crawl
                     # caption = ""
                     # try:
@@ -113,13 +112,16 @@ class InsCrawler(Logging):
                     #         print("caption: ", caption)
                     #     except Exception:
                     #         caption = ele_img.get_attribute("alt")
-                    dict_post["caption"] = data["graphql"]["shortcode_media"]["edge_media_to_caption"]["edges"][0]["node"]["text"]
+                    if len((data["graphql"]["shortcode_media"]["edge_media_to_caption"]["edges"])) == 0: 
+                        dict_post["caption"] = ""
+                    else:
+                        dict_post["caption"] = data["graphql"]["shortcode_media"]["edge_media_to_caption"]["edges"][0]["node"]["text"]
                     # # Update 03/13/2020: Update finish
                     fetch_details(browser, dict_post)
 
                     key_set.add(key)
                     posts.append(dict_post)
-
+                    
                     if len(posts) == num:
                         break
 
