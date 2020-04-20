@@ -29,12 +29,12 @@ def arg_required(args, fields=[]):
 
 
 def output(data):
-    out = json.dumps(data, ensure_ascii=False)
+    out = json.dumps(data[0], ensure_ascii=False)
     strings = ""
     urlList = []
 
     # Todo: Tone Analyzer should analyze each argument.
-    for x in data:
+    for x in data[0]:
         if 'caption' in x and x['caption']:
             # print(x['description'])
             strings += x['caption']
@@ -53,7 +53,7 @@ def output(data):
     print("printing textTone")
     if textTone:
         print(textTone)
-    return [imgTone, textTone]
+    return [imgTone, textTone, urlList, data[1]]
 
 
 if __name__ == "__main__":

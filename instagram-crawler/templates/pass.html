@@ -6,7 +6,6 @@
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-
         // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages':['corechart']});
         // Set a callback to run when the Google Visualization API is loaded.
@@ -72,6 +71,61 @@
             margin-left: auto;
             display: block;
         }
+        .image-post-container {
+          margin-left: 50px;
+          margin-right: 50px;
+          display: flex;
+          justify-content: space-between;
+          height: 215px;
+        }
+
+        .image-post{
+            width: 182px;
+            height: 215px;
+            background: #FFFFFF;
+        }
+        .image{
+            width: 182px;
+            height: 182px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        img{
+            width: 182px;
+            height: 182px;
+            object-fit: cover;
+            border-radius: 4px;
+            object-position: top;
+        }
+        .score-bar{
+            margin-top: 10px;
+            width: 182px;
+            height: 8px;
+            float: left;
+            display:flex;
+            flex-wrap: wrap;
+        }
+        .score-section{
+            height: 8px;
+        }
+
+        #anger{
+            width: 52px;
+            background: #FD2EB3;
+        }
+        #happiness{
+            width: 63px;
+            background: #FB8D62;
+        }
+        #neutral{
+            width: 28px;
+            background: #FDD365;
+        }
+        #sadness{
+            width: 39px;
+            background: #61D4B3;
+        }
     </style>
 </head>
 <body>
@@ -80,6 +134,64 @@
 <div id="chart_div" class="chart"></div>
 <div id="chart_hist" class="chart"></div>
 
+<div class="image-post-container">
+    <div class="image-post">
+        {% for key, value in post.items() %}
+            <div class="image">
+                <a href="https://www.instagram.com/p/B8AQ0QFJ8Gl/">
+                <img src={{ value }}>
+                </a>
+            </div>
+        <div class="score-bar">
+            <div class="score-section" id="anger"></div>
+            <div class="score-section" id="happiness"></div>
+            <div class="score-section" id="neutral"></div>
+            <div class="score-section" id="sadness"></div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+<!--        <div class="image-post">-->
+<!--        <div class="image">-->
+<!--                <a href="https://www.instagram.com/p/B8AQ0QFJ8Gl/">-->
+<!--                <img src="https://pbs.twimg.com/media/ESBId4IX0AA9y1B.jpg">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        <div class="score-bar">-->
+<!--            <div class="score-section" id="anger"></div>-->
+<!--            <div class="score-section" id="happiness"></div>-->
+<!--            <div class="score-section" id="neutral"></div>-->
+<!--            <div class="score-section" id="sadness"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="image-post">-->
+<!--        <div class="image">-->
+<!--                <a href="https://www.instagram.com/p/B8AQ0QFJ8Gl/">-->
+<!--                <img src="https://pbs.twimg.com/media/ESBId4IX0AA9y1B.jpg">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        <div class="score-bar">-->
+<!--            <div class="score-section" id="anger"></div>-->
+<!--            <div class="score-section" id="happiness"></div>-->
+<!--            <div class="score-section" id="neutral"></div>-->
+<!--            <div class="score-section" id="sadness"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--        <div class="image-post">-->
+<!--        <div class="image">-->
+<!--                <a href="https://www.instagram.com/p/B8AQ0QFJ8Gl/">-->
+<!--                <img src="https://pbs.twimg.com/media/ESBId4IX0AA9y1B.jpg">-->
+<!--                </a>-->
+<!--        </div>-->
+<!--        <div class="score-bar">-->
+<!--            <div class="score-section" id="anger"></div>-->
+<!--            <div class="score-section" id="happiness"></div>-->
+<!--            <div class="score-section" id="neutral"></div>-->
+<!--            <div class="score-section" id="sadness"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
 </body>
 </html>
 

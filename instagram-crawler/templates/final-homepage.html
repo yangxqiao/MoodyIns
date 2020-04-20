@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title ｜ Pass</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        h1{
+            font-weight: 700;
+            font-size: 5em;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .chart {
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+        }
+        #image-post-container {
+            margin-left: 50px;
+            margin-right: 50px;
+            display: flex;
+            justify-content: space-between;
+            height: 215px;
+        }
+
+        .image-post{
+            width: 182px;
+            height: 215px;
+            background: #FFFFFF;
+        }
+        .image{
+            width: 182px;
+            height: 182px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        img{
+            width: 182px;
+            height: 182px;
+            object-fit: cover;
+            border-radius: 4px;
+            object-position: top;
+        }
+        .score-bar{
+            margin-top: 10px;
+            width: 182px;
+            height: 8px;
+            float: left;
+            display:flex;
+            flex-wrap: wrap;
+        }
+        .score-section{
+            height: 8px;
+        }
+
+        #anger{
+            width: 52px;
+            background: #FD2EB3;
+        }
+        #happiness{
+            width: 63px;
+            background: #FB8D62;
+        }
+        #neutral{
+            width: 28px;
+            background: #FDD365;
+        }
+        #sadness{
+            width: 39px;
+            background: #61D4B3;
+        }
+        #searchbar{
+            padding: 3% 15%;
+        }
+        #tabs{
+            padding: 3% 15%;
+        }
+        .hidden{
+            display:none;
+        }
+
+        .unhidden{
+            display:block;
+        }
+    </style>
+    {#    chart js#}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            // Create the data table.
+
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['Anger', {{anger}}],
+                ['Happiness', {{happiness}}],
+                ['Neutral', {{neutral}}],
+                ['Sadness', {{sadness}}],
+                ['Not Available', {{ imgnotAvailable }}]
+            ]);
+            // Set chart options
+            var options = {'title':'People\'s expression through image',
+                'width':400,
+                'height':300};
+            // Set chart options
+
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'Topping2');
+            data2.addColumn('number', 'Slices2');
+            data2.addRows([
+
+                // not working with below and I don't know why
+                ['sadness', {{txtsadness}}],
+                ['fear', {{ txtfear }}],
+                ['joy', {{ txtjoy }}],
+                ['confident', {{ txtconfident }}],
+                ['anger', {{ txtanger }}],
+                ['analytical', {{ txtanalytical }}],
+                ['tentative', {{ txttentative }}],
+                ['Not Available', {{ txtnotAvailable }}]
+            ]);
+
+
+
+            var options2 = {
+                'title': 'People\'s expression through text',
+                'width':400,
+                'height':300
+            };
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            var chart2 = new google.visualization.PieChart(document.getElementById('chart_hist'));
+            chart.draw(data, options);
+            chart2.draw(data2, options2);
+        }
+
+    </script>
+    <script type="text/javascript">
+        function unhide(clickedButton, divID) {
+            var item = document.getElementById(divID);
+            if (item) {
+                if(item.className ==='hidden'){
+                    item.className = 'unhidden' ;
+                }else{
+                    item.className = 'hidden';
+                }
+            }}
+    </script>
+</head>
+
+<body>
+
+<section id="searchbar">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">MoodyIns</a>
+        <!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="unhide(this, 'tabs')">Search</button> -->
+        <!--          <input type="button" onclick="unhide(this, 'tabs') " value="Search" name="hashtag"> -->
+        <form class="pure-form" action="." method="post">
+            <input id="input-hashtag" class="controls" type="text" name="hashtag" placeholder="Enter a hashtag">
+            <input type="submit" value="submit"/>
+        </form>
+    </nav>
+</section>
+
+
+<section id="tabs">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#img" role="tab">img</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#text" role="tab">text</a>
+        </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="img" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div id="image-post-container">
+                <!--<div class="image-post" >-->
+                    <!--<div class="image">-->
+                        <!--<a href="{{ post1 }}" target="_blank">-->
+                            <!--<img src="{{ url1 }}">-->
+                        <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="score-bar">-->
+                        <!--<div class="score-section" id="anger"></div>-->
+                        <!--<div class="score-section" id="happiness"></div>-->
+                        <!--<div class="score-section" id="neutral"></div>-->
+                        <!--<div class="score-section" id="sadness"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+
+        <div class="tab-pane fade" id="text" role="tabpanel">
+            <h4 class="mt-2">Messages tab content</h4>
+            <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+            <div id="chart_div" class="chart"></div>
+            <div id="chart_hist" class="chart"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dataURL = JSON.parse(JSON.stringify({{ url|safe }}));
+        var dataPost = JSON.parse(JSON.stringify({{ post|safe }}));
+        var key, count = 0;
+        for(key in dataURL) {
+            count++;
+        }
+
+
+       var urlKey = ['url1', 'url2', 'url3', 'url4', 'url5']
+       var postKey = ['post1', 'post2', 'post3', 'post4', 'post5']
+       for(var i = 0; i < count; i++){
+             var my_html = "<div class=\"image-post\" > <div class=\"image\"> <a href=\" " + dataPost[postKey[i]] + " \" target=\"_blank\"> <img src=\" " + dataURL[urlKey[i]] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\"></div> <div class=\"score-section\" id=\"happiness\"></div> <div class=\"score-section\" id=\"neutral\"></div> <div class=\"score-section\" id=\"sadness\"></div></div> </div>"
+             document.getElementById('image-post-container').innerHTML += my_html
+        }
+
+    }, false);
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
