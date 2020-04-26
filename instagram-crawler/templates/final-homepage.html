@@ -237,17 +237,21 @@
             count++;
         }
 
-        {#url = tone[2]   #}
-        {#post = tone[3]#}
+        var happiness = parseFloat(JSON.stringify({{happiness}}))
+        var anger = parseFloat(JSON.stringify({{anger}}))
+        var neutral = parseFloat(JSON.stringify({{neutral}}))
+        var sadness = parseFloat(JSON.stringify({{sadness}}))
+        var total = happiness + anger + neutral + sadness
+        var happiness_width = happiness / total * 182
+        var anger_width = anger / total * 182
+        var neutral_width = neutral / total * 182
+        var sadness_width = sadness / total * 182
 
-       {#var urlKey = ['url1', 'url2', 'url3', 'url4', 'url5', 'url6', 'url7','url8','url9'];#}
-       {#var postKey = ['post1', 'post2', 'post3', 'post4', 'post5','post6','post7','post8','post9'];#}
-       for(var i = 0; i < count; i++){
-             var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\"></div> <div class=\"score-section\" id=\"happiness\"></div> <div class=\"score-section\" id=\"neutral\"></div> <div class=\"score-section\" id=\"sadness\"></div></div> </div>"
+
+        for(var i = 0; i < count; i++){
+             var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\" style=\"width: " + anger_width + "px;\"></div> <div class=\"score-section\" id=\"happiness\" style=\"width: " + happiness_width + "px;\"></div> <div class=\"score-section\" id=\"neutral\" style=\"width: " + neutral_width + "px;\"></div> <div class=\"score-section\" id=\"sadness\" style=\"width: " + sadness_width + "px;\"></div></div> </div>"
              document.getElementById('image-post-container').innerHTML += my_html
-        }
-
-    }, false);
+        }}, false);
 
 
 </script>

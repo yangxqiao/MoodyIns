@@ -12,7 +12,7 @@ from time import sleep
 
 from tqdm import tqdm
 
-from . import secret
+# from . import secret
 from .browser import Browser
 from .exceptions import RetryException
 from .fetch import fetch_details
