@@ -63,18 +63,42 @@ def getVal():
     post = tone[3]
     imgscores = tone[4]
 
+    anger_scores = []
+    happiness_scores = []
+    neutral_scores = []
+    sadness_scores = []
+    for key in imgscores:
+        if key is None:
+            anger_scores.append(-1)
+            happiness_scores.append(-1)
+            neutral_scores.append(-1)
+            sadness_scores.append(-1)
+        else:
+            anger_scores.append(key['anger'])
+            happiness_scores.append(key['happiness'])
+            neutral_scores.append(key['neutral'])
+            sadness_scores.append(key['sadness'])
+
+    print("this is tone 4\n")
+    print(imgscores)
+    print(anger_scores)
+    print(happiness_scores)
+    print(neutral_scores)
+    print(sadness_scores)
+
     print(imgscores)
 
-    return render_template('final-homepage.html', tone = tone, anger = imganger, disgust = imgdisgust, fear = imgfear,
-                           happiness = imghappiness, neutral = imgneutral, sadness = imgsadness, surprise = imgsurprise,
-                            contempt = imgcontempt, imgnotAvailable = imgnotAvailable,
-                           txtanger = txtanger, txtfear = txtfear, txtjoy = txtjoy, txtsadness = txtsadness,
-                           txtanalytical = txtanalytical,
-                           txtconfident = txtconfident, txttentative = txttentative, txtnotAvailable = txtnotAvailable,
-                           #  url1 = tone[2][0], url2 = tone[2][1], url3 = tone[2][2], url4 = tone[2][3], url5 = tone[2][4],
-                           # post1=tone[3][0], post2=tone[3][1], post3=tone[3][2], post4=tone[3][3], post5=tone[3][4]
-                           url = url, post = post, imgscores = imgscores
+    return render_template('final-homepage.html', tone=tone, anger=imganger, disgust=imgdisgust, fear=imgfear,
+                           happiness=imghappiness, neutral=imgneutral, sadness=imgsadness, surprise=imgsurprise,
+                           contempt=imgcontempt, imgnotAvailable=imgnotAvailable,
+                           txtanger=txtanger, txtfear=txtfear, txtjoy=txtjoy, txtsadness=txtsadness,
+                           txtanalytical=txtanalytical,
+                           txtconfident=txtconfident, txttentative=txttentative, txtnotAvailable=txtnotAvailable,
+                           url=url, post=post, imgscores=imgscores,
+                           angerscores=anger_scores, happinessscores=happiness_scores, neutralscores=neutral_scores,
+                           sadnessscores=sadness_scores
                            )
+
 
 if __name__ == '__main__':
     app.run(debug=True)
