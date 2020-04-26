@@ -258,24 +258,13 @@
             sadnessWidth.push(sadness);
         }
 
-        var happiness = parseFloat(JSON.stringify({{happiness}}))
-        var anger = parseFloat(JSON.stringify({{anger}}))
-        var neutral = parseFloat(JSON.stringify({{neutral}}))
-        var sadness = parseFloat(JSON.stringify({{sadness}}))
-        var total = happiness + anger + neutral + sadness
-        var happiness_width = happiness / total * 182
-        var anger_width = anger / total * 182
-        var neutral_width = neutral / total * 182
-        var sadness_width = sadness / total * 182
-
-
         for(var i = 0; i < dataPost.length; i++){
             if(angerScores[i] == -1){
                 var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"no-score\"></div></div> </div>"
                 document.getElementById('image-post-container').innerHTML += my_html
             }
             else{
-                 var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\" style=\"width: " + anger_width + "px;\"></div> <div class=\"score-section\" id=\"happiness\" style=\"width: " + happiness_width + "px;\"></div> <div class=\"score-section\" id=\"neutral\" style=\"width: " + neutral_width + "px;\"></div> <div class=\"score-section\" id=\"sadness\" style=\"width: " + sadness_width + "px;\"></div></div> </div>"
+                 var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\" style=\"width: " + angerWidth[i] + "px;\"></div> <div class=\"score-section\" id=\"happiness\" style=\"width: " + happinessWidth[i] + "px;\"></div> <div class=\"score-section\" id=\"neutral\" style=\"width: " + neutralWidth[i] + "px;\"></div> <div class=\"score-section\" id=\"sadness\" style=\"width: " + sadnessWidth[i] + "px;\"></div></div> </div>"
                  document.getElementById('image-post-container').innerHTML += my_html
             }
         }

@@ -85,7 +85,6 @@ def getVal():
     print(happiness_scores)
     print(neutral_scores)
     print(sadness_scores)
-
     print(imgscores)
 
     return render_template('final-homepage.html', tone=tone, anger=imganger, disgust=imgdisgust, fear=imgfear,
