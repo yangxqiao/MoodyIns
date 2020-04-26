@@ -237,11 +237,26 @@
     document.addEventListener('DOMContentLoaded', function() {
         var dataURL = JSON.parse(JSON.stringify({{ url|safe }}));
         var dataPost = JSON.parse(JSON.stringify({{ post|safe }}));
-        var key, count = 0;
-        for(key in dataURL) {
-            count++;
-        }
+        var angerScores = JSON.parse(JSON.stringify({{ angerscores|safe }}));
+        var happinessScores = JSON.parse(JSON.stringify({{ happinessscores|safe }}));
+        var neutralScores = JSON.parse(JSON.stringify({{ neutralscores|safe }}));
+        var sadnessScores = JSON.parse(JSON.stringify({{ sadnessscores|safe }}));
 
+        var angerWidth = [];
+        var neutralWidth = [];
+        var sadnessWidth = [];
+        var happinessWidth = [];
+        for(var i = 0; i < angerScores.length; i++){
+            var total = angerScores[i] + happinessScores[i] + neutralScores[i] + sadnessScores[i];
+            var anger = angerScores[i] / total * 182
+            angerWidth.push(anger);
+            var happiness = happinessScores[i] / total * 182
+            happinessWidth.push(happiness);
+            var neutral = neutralScores[i] / total * 182
+            neutralWidth.push(neutral);
+            var sadness = sadnessScores[i] / total * 182
+            sadnessWidth.push(sadness);
+        }
 
         var happiness = parseFloat(JSON.stringify({{happiness}}))
         var anger = parseFloat(JSON.stringify({{anger}}))
@@ -254,9 +269,15 @@
         var sadness_width = sadness / total * 182
 
 
-        for(var i = 0; i < count; i++){
-             var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\" style=\"width: " + anger_width + "px;\"></div> <div class=\"score-section\" id=\"happiness\" style=\"width: " + happiness_width + "px;\"></div> <div class=\"score-section\" id=\"neutral\" style=\"width: " + neutral_width + "px;\"></div> <div class=\"score-section\" id=\"sadness\" style=\"width: " + sadness_width + "px;\"></div></div> </div>"
-             document.getElementById('image-post-container').innerHTML += my_html
+        for(var i = 0; i < dataPost.length; i++){
+            if(angerScores[i] == -1){
+                var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"no-score\"></div></div> </div>"
+                document.getElementById('image-post-container').innerHTML += my_html
+            }
+            else{
+                 var my_html = "<div class=\"image-post col-lg-4\" > <div class=\"image\"> <a href=\" " + dataPost[i] + " \" target=\"_blank\"> <img src=\" " + dataURL[i] + " \"></a> </div> <div class=\"score-bar\"> <div class=\"score-section\" id=\"anger\" style=\"width: " + anger_width + "px;\"></div> <div class=\"score-section\" id=\"happiness\" style=\"width: " + happiness_width + "px;\"></div> <div class=\"score-section\" id=\"neutral\" style=\"width: " + neutral_width + "px;\"></div> <div class=\"score-section\" id=\"sadness\" style=\"width: " + sadness_width + "px;\"></div></div> </div>"
+                 document.getElementById('image-post-container').innerHTML += my_html
+            }
         }
 
     }, false);
