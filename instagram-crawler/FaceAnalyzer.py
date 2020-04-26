@@ -1,5 +1,6 @@
 import http.client, urllib.request, urllib.parse, urllib.error, base64, json
 
+
 def faceAnalyzer(urls):
     headers = {
         # Request headers
@@ -26,35 +27,14 @@ def faceAnalyzer(urls):
         conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
         for a in urls:
 
-            # theString = "\'{\"url\": \""+ a +"\"}\'"
-            # print(theString)
-
-            # conn.request("POST", "/face/v1.0/detect?%s" % params,
-            #              '{"url": "https://i.insider.com/5dcc3df979d7570d633e10ea?width=1100&format=jpeg&auto=webp"}',
-            #              headers)
-            # print("one")
-            # print(a)
-            # print(type(a))
             theString = '{\"url\": \"' + a + '\"}'
-            #theString = '{\"url\": \"'+ a +'\"}'
-            # print(theString)
             conn.request("POST", "/face/v1.0/detect?%s" % params,
-                    theString, headers)
-            #print("two")
+                         theString, headers)
 
             response = conn.getresponse()
             data = response.read()
-            # print(data)
             new_data = data.decode('utf-8')
-            # print(new_data)
-            # print("before dumps")
-            # print(type(new_data))
-            # print(new_data)
             new_data = json.loads(new_data)
-            # print(new_data)
-            # print("after")
-            # print(type(new_data))
-            # print(new_data)
             # edge cases when images have no faces
             print("printing new_data")
             print(new_data)
@@ -66,10 +46,12 @@ def faceAnalyzer(urls):
                 # print(fool)
                 faces += 1
                 individualTones.append(new_data[0]['faceAttributes']['emotion'])
+            else:
+                individualTones.append(None)
             conn.close()
-            
+
         for key in fool:
-            fool[key]/=faces
+            fool[key] /= faces
         # print(fool)
         return fool, individualTones
 

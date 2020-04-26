@@ -62,8 +62,8 @@ def getVal():
     url = tone[2]
     post = tone[3]
     imgscores = tone[4]
-    # url = {'url1': tone[2][0], 'url2': tone[2][1], 'url3': tone[2][2], 'url4': tone[2][3], 'url5': tone[2][4], 'url6': tone[2][5], 'url7': tone[2][6], 'url8': tone[2][7], 'url9': tone[2][8]}
-    # post = {'post1': tone[3][0], 'post2': tone[3][1], 'post3': tone[3][2], 'post4': tone[3][3], 'post5': tone[3][4], 'post6': tone[3][5], 'post7': tone[3][6], 'post8': tone[3][7], 'post9': tone[3][8]}
+
+    print(imgscores)
 
     return render_template('final-homepage.html', tone = tone, anger = imganger, disgust = imgdisgust, fear = imgfear,
                            happiness = imghappiness, neutral = imgneutral, sadness = imgsadness, surprise = imgsurprise,
